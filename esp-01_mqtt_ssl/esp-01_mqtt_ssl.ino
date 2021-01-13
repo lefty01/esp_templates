@@ -28,7 +28,7 @@
 #define DEBUG 1
 #define DEBUG_MQTT 1
 
-const char* VERSION = "0.0.1";
+const char* VERSION = "0.0.2";
 #define MQTTDEVICEID "ESP-01_MQTTSSL_01"
 
 #include "debug_print.h"
@@ -54,6 +54,7 @@ unsigned long sw_timer_clock;
 const char* MQTT_TOPIC_STATE     = MQTTDEVICEID "/state";
 const char* MQTT_TOPIC_SET       = MQTTDEVICEID "/set";
 const char* MQTT_TOPIC_UPTIME    = MQTTDEVICEID "/uptime";
+const char* MQTT_TOPIC_RSSI      = MQTTDEVICEID "/rssi";
 
 
 BearSSL::X509List   server_cert(server_crt_str);
@@ -155,9 +156,9 @@ void mqttCallback(char* topic, byte* payload, unsigned int length)
 void setup() {
 
   DEBUG_BEGIN(115200);
-  DEBUG_PRINTLN("");
-  DEBUG_PRINTLN("setup begin...");
-  DEBUG_PRINTHEX(ESP.getChipId());
+  DEBUG_PRINTLN("SETUP BEGIN ...");
+  DEBUG_PRINT("esp chipid: ");
+  DEBUG_PRINTLNHEX(ESP.getChipId());
 
   pinMode(LED_BUILTIN, OUTPUT);    // Initialize the LED_BUILTIN pin as an output
   digitalWrite(LED_BUILTIN, HIGH); // Turn the LED off (low active)
@@ -185,7 +186,7 @@ void setup() {
   if (isMqttAvailable) {
     isMqttAvailable = mqttClient.publish(MQTT_TOPIC_STATE, "setup done");
   }
-  DEBUG_PRINTLN("setup_done");
+  DEBUG_PRINTLN("SETUP DONE");
 }
 
 
@@ -203,8 +204,10 @@ void loop() {
 
     if (isMqttAvailable) {
       char up[16];
+      rssi = WiFi.RSSI();
       sprintf(up, "%ld", sw_timer_clock);
       isMqttAvailable = mqttClient.publish(MQTT_TOPIC_UPTIME, up);
+      isMqttAvailable = mqttClient.publish(MQTT_TOPIC_RSSI, rssi.c_str());
     }
   }
 }

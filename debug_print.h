@@ -40,6 +40,7 @@ const char* mqttDbg = MQTTDEVICEID "/debug";
 #define DEBUG_PRINTLN(x)      Serial.println(x)
 #define DEBUG_PRINTDEC(x)     Serial.print(x, DEC)
 #define DEBUG_PRINTHEX(x)     Serial.print(x, HEX)
+#define DEBUG_PRINTLNHEX(x)   Serial.println(x, HEX)
 #define DEBUG_PRINTF(x_, ...) Serial.printf((x_), ##__VA_ARGS__)
 
 #else
