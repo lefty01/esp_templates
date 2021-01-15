@@ -22,8 +22,9 @@
  * SOFTWARE.
  *
  *
- * NOTE: SSD1306Wire.h from git@github.com:ThingPulse/esp8266-oled-ssd1306.git
- * NOTE: above version did not work for me (2021-01-15) ... I have an older version
+ * NOTE: SSD1306Wire.h from https://github.com/lefty01/esp8266-oled-ssd1306
+ *       which is a fork of git@github.com:ThingPulse/esp8266-oled-ssd1306.git
+ *       but contains a fix for (typo?) ESP8266 ARCH define (2021-01-15)
  *
  */
 
