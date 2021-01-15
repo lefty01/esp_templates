@@ -259,11 +259,12 @@ void loop() {
     display.setTextAlignment(TEXT_ALIGN_CENTER);
     display.setFont(ArialMT_Plain_16);
     display.drawStringMaxWidth(display.getWidth()/2, 0, 128, "UPTIME");
+    display.drawLine(5, 20, display.getWidth()-5, 20);
+    display.drawRect(20, 32, 88, 15);
 
     display.setFont(ArialMT_Plain_10);
     display.drawStringMaxWidth(display.getWidth()/2, 32, 128, up);
 
-    display.fillRect(14, 32, 15, 15);
     display.display();
   }
 }
